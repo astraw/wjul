@@ -143,6 +143,15 @@ def cbAInScan( board, LowChan, HighChan, Count,
                                            Rate, options, ADData)
     return rate
 
+def cbAInStop( board):
+    """
+    stop analog scan?
+    """
+    global _usbhandler
+    device = _get_device(board)
+    PMD.usbAInStop_USB1208FS(device)
+    return board
+
 def cbAOut( board, chan, gain, value):
     global _usbhandler
     gain_str2pmd[gain]

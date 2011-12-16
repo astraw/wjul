@@ -88,6 +88,9 @@ mcclibhid.usbAInScan_USB1208FS.argtypes = [
     HIDInterfacePtrPtr, __u8, __u8, __u32,
     ctypes.POINTER( ctypes.c_float), __u8, ctypes.POINTER(__s16) ]
 
+mcclibhid.usbAInStop_USB1208FS.restype = None
+mcclibhid.usbAInStop_USB1208FS.argtypes = [HIDInterfacePtr]
+
 mcclibhid.usbAOut_USB1208FS.restype = None
 mcclibhid.usbAOut_USB1208FS.argtypes = [HIDInterfacePtr, __u8, __u16]
 
@@ -167,6 +170,9 @@ def usbAInScan_USB1208FS(device, lowchannel, highchannel, count,
                                            ctypes.byref(frequency), options,
                                            data.ctypes.data_as(ctypes.POINTER(__s16)))
     return count, frequency.value
+
+def usbAInStop_USB1208FS(device):
+    return mcclibhid.usbAInStop_USB1208FS(device.g2(0))
 
 def usbAOut_USB1208FS(device, channel, value):
     return mcclibhid.usbAOut_USB1208FS( device.g2(0), channel, value)
